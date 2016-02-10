@@ -1,0 +1,56 @@
+Plan for the MVP:
+
+HTML/CSS:
+
+User interface- needs to display the cards for all players, and their total.
+We could start with 3 players + dealer to keep it simple.
+All interaction could be handled by prompts, for now. 
+
+JS Functions:
+
+newGame() {
+	
+	Starts a new game and generates a deck of cards.
+
+}
+
+deal() {
+	
+	Deal cards to all 3 players + dealer, then checks for blackjacks, then decides whose turn it is, and calls playersTurn
+
+}
+
+playersTurn(player) {
+	
+	Prompt player to hit or stay, and call the according function
+
+}
+
+hit() {
+	
+	Deal the player one new card, recalculate total value, and either prompt for hit or stay again, or move to next player (if bust/blackjack), logging the player's total to array or object.
+	Either call playersTurn for next player, or if last player, call dealersTurn
+
+}
+
+stay() {
+	
+	Log the player's total, and move to next player
+	Either call playersTurn for next player, or if last player, call dealersTurn
+
+}
+
+dealersTurn() {
+	
+	Decide whether to hit or stay.
+	Once dealer decides to stay, log his total and call endGame
+
+}
+
+endGame() {
+	
+	Compare each player's total, declare victor(s). Prompt to play again.
+
+}
+
+We could split the files into setup.js, player.js, and dealer.js.
