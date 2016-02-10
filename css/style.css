@@ -5,3 +5,19 @@
   font-weight: bolder;
   text-align: center;
 }
+
+.playerHand {
+  text-align: center;
+}
+.dealer-hand-outer h2 {
+  text-align: center;
+}
+.hit-button {
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+  border: 1px solid;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 8px;
+}
