@@ -11,7 +11,7 @@ $(function () {
 		var handTwo = dealHand(deck);
 		var dealerHand = dealHand(deck);
 		$('#handOneScore').text(calculateScore(handOne));
-		$('#handTwoScore').text(calculateScore(handOne));
+		$('#handTwoScore').text(calculateScore(handTwo));
 		$('#dealerScore').text(calculateScore(dealerHand));
 	})
 });

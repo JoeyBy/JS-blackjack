@@ -2,8 +2,13 @@
 .playerHand {
   text-align: center;
 }
-.dealer-hand-outer h2 {
+.dealer-hand-outer {
   text-align: center;
+}
+.score {
+  width: 100%;
+  font-size: 1.5em;
+  display: block;
 }
 .button {
   display: inline-block;
