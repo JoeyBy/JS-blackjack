@@ -1,18 +1,11 @@
 
-
-.scott h1 {
-  color: red;
-  font-weight: bolder;
-  text-align: center;
-}
-
 .playerHand {
   text-align: center;
 }
 .dealer-hand-outer h2 {
   text-align: center;
 }
-.hit-button {
+.button {
   display: inline-block;
   width: 80px;
   text-align: center;
@@ -20,4 +13,14 @@
   padding-top: 6px;
   padding-bottom: 6px;
   border-radius: 8px;
+}
+.top-button {
+  display: block;
+  font-size: 1.5em;
+  width: 200px;
+  margin: 20px auto;
+}
+
+#deal {
+  display: none;
 }

@@ -8,11 +8,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/app.js" type="text/javascript"></script>
+<script src="js/new-game.js" type="text/javascript"></script>
 </head>
 <body>
   <section>
-    <div class="container joey-is-the-one-who-smells">
-      <h1>Joey sucks butt</h1>
+    <div class="container commands">
+      <div class="button top-button" id="startGame">Start Game</div>
+      <div class="button top-button" id="deal">Deal</div>
     </div>
   </section>  
 
@@ -20,6 +22,7 @@
     <div class="row">
       <div class="dealer-hand-outer card-hand">
         <h2>Dealer</h2>
+        <span class="score" id="dealerScore"></span>
         <span id="dealerHand"></span>
       </div>
     </div>
@@ -27,15 +30,15 @@
       <div class="player-hands-outer card-hand">
         <div class="col-sm-6 playerHand">
           <h2>Player One</h2>
-          <span id="handOne"></span>
-          <div class="hit-button" id="playerOneHit">HIT</div>
-          <div class="hit-button" id="playerOneStay">STAY</div>
+          <span class="score" id="handOneScore"></span>
+          <div class="button" id="playerOneHit">HIT</div>
+          <div class="button" id="playerOneStay">STAY</div>
         </div>
         <div class="col-sm-6 playerHand">
           <h2>Player Two</h2>
-          <span id="handTwo"></span>
-          <div class="hit-button" id="playerTwoHit">HIT</div>
-          <div class="hit-button" id="playerTwoStay">STAY</div>
+          <span class="score" id="handTwoScore"></span>
+          <div class="button" id="playerTwoHit">HIT</div>
+          <div class="button" id="playerTwoStay">STAY</div>
         </div>
       </div>
     </div>
