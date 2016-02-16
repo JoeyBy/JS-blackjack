@@ -1,18 +1,17 @@
 $(function () {
 	
 	$('#startGame').on('click', function () {
-		createDeck(cardSuits, cardValues);
-
 		$('#startGame').hide();
 		$('#deal').show();
 	});
 	$('#deal').on('click', function () {
-		var handOne = dealHand(deck);
-		var handTwo = dealHand(deck);
-		var dealerHand = dealHand(deck);
-		$('#handOneScore').text(calculateScore(handOne));
-		$('#handTwoScore').text(calculateScore(handTwo));
-		$('#dealerScore').text(calculateScore(dealerHand));
+		createDeck(cardSuits, cardValues);
+		player1.hand = dealHand(deck);
+		player2.hand = dealHand(deck);
+		dealer.hand = dealHand(deck);
+		$('#playerOneScore').text(calculateScore(player1.hand));
+		$('#playerTwoScore').text(calculateScore(player2.hand));
+		$('#dealerScore').text(calculateScore(dealer.hand));
 	})
 });
 
@@ -27,6 +26,15 @@ function Card (suit, value) {
 	this.value= value;
 }
 
+function Player (name, hand, total) {
+	this.name = name;
+	this.total = 0;
+	this.hand = [];
+}
+var player1 = new Player("Joey");
+var player2 = new Player("Scott");
+var dealer = new Player("Dealer");
+
 function createDeck(cardSuits, cardValues) {
 
 	deck = [];
@@ -40,7 +48,6 @@ function createDeck(cardSuits, cardValues) {
 			deck.push(currentCard);
 		}
 	}
-	console.log(deck);
 }
 
 function dealHand(deck) {
@@ -55,9 +62,9 @@ function dealHand(deck) {
 
 function dealCard(deck) {
 
-	// Generate a randon number, then pull card of that number from deck array
+	// Generate a random number, then pull card of that number from deck array, removing it from the deck
 	var cardNumber = randomNumber(deck);
-	return deck[cardNumber];
+	return deck.splice(cardNumber, 1)[0];
 }
 
 function randomNumber(deck) 
@@ -66,19 +73,29 @@ function randomNumber(deck)
 };
 
 function calculateScore (hand) {
-
-	total = 0;
+	var total = 0;
 	// Loop through the hand, and convert letter values to numbers, then add to total
 	for (var i = 0; i < hand.length; i++) {
-		var value = hand[i].value;
-		if (value === "J" || value === "Q" || value === "K") {
-			value = 10;
-		} else if (value === "A") {
-			value = 1;
+		if (hand[i].value === "J" || hand[i].value === "Q" || hand[i].value === "K") {
+			total += 10;
+		// If card is an ace, check to see whether it should be 1 or 11
+		} else if (hand[i].value === "A") {
+			if (total + 11 > 21) {
+				total += 1;
+			} else {
+				total += 11;
+			}
 		} else {
-			value = parseInt(value);
-		}
-		total += value;	
+			total += parseInt(hand[i].value);
+		}		
 	}
-	return total;
+
+	// If total is a blackjack, or a bust, tell player- otherwise just display total
+	if (total > 21) {
+		return "Bust! (" + total + ")";	
+	} else if (total === 21) {
+		return "Blackjack!";
+	} else {
+		return total;
+	}
 }
