@@ -15,13 +15,23 @@ $(function () {
 		displayCards(player1);
 		displayCards(player2);
 		displayCards(dealer);
+		playersTurn(player1);
 	})
 
 	$('#playerOneHit').on('click', function () {
-		$('#playerOneScore').text(hit(player1));
+		if ($(this).hasClass('is-active')) {
+			hit(player1);
+		}
+	});
+	$('#playerOneStay').on('click', function () {
+		if ($(this).hasClass('is-active')) {
+			stay(player1);
+		}
 	});
 	$('#playerTwoHit').on('click', function () {
-		$('#playerTwoScore').text(hit(player2));
+		if ($(this).hasClass('is-active')) {
+			hit(player2);
+		}
 	});
 
 });
@@ -41,11 +51,12 @@ function Player (number, hand, total, container) {
 	this.number = number;
 	this.total = 0;
 	this.hand = [];
-	this.container = '#player' + number + 'Hand';
+	this.container = 'player' + number + 'Hand';
 }
 var dealer = new Player(0);
 var player1 = new Player(1);
 var player2 = new Player(2);
+var players = [dealer, player1, player2];
 
 
 function createDeck(cardSuits, cardValues) {
@@ -87,7 +98,7 @@ function randomNumber(deck)
 
 function calculateScore (player) {
 	var total = 0;
-	var scoreboard = document.querySelector(player.container + ' .score');
+	var scoreboard = document.querySelector('#' + player.container + ' .score');
 	// Loop through the hand, and convert letter values to numbers, then add to total
 	for (var i = 0; i < player.hand.length; i++) {
 		if (player.hand[i].value === "J" || player.hand[i].value === "Q" || player.hand[i].value === "K") {
@@ -118,9 +129,9 @@ function calculateScore (player) {
 function displayCards(player) {
 
 	// Flip all the cards in the hand
-	document.querySelector(player.container + ' .card-container').className = 'card-container flipped';
-	var suits = document.querySelectorAll(player.container + ' .suit');
-	var values = document.querySelectorAll(player.container + ' .value');
+	document.querySelector('#' + player.container + ' .card-container').className = 'card-container flipped';
+	var suits = document.querySelectorAll('#' + player.container + ' .suit');
+	var values = document.querySelectorAll('#' + player.container + ' .value');
 	// Display the suits and values
 	for (var i = 0; i < suits.length; i++) {
 		suits[i].innerHTML = player.hand[i].suit;
