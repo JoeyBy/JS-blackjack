@@ -12,6 +12,7 @@ $(function () {
 		$('#playerOneScore').text(calculateScore(player1.hand));
 		$('#playerTwoScore').text(calculateScore(player2.hand));
 		$('#dealerScore').text(calculateScore(dealer.hand));
+		displayCards(player1.hand, '#playerOneHand');
 	})
 });
 
@@ -98,4 +99,15 @@ function calculateScore (hand) {
 	} else {
 		return total;
 	}
+}
+
+function displayCards(hand, handID) {
+
+	var suits = document.querySelectorAll(handID + ' .suit');
+	var values = document.querySelectorAll(handID + ' .value');
+	suits[0].innerHTML = player1.hand[0].suit;
+	suits[1].innerHTML = player1.hand[1].suit;
+	values[0].innerHTML = player1.hand[0].value;
+	values[1].innerHTML = player1.hand[1].value;
+
 }
