@@ -3,6 +3,12 @@
 function hit(player) {
 
 	player.hand.push(dealCard(deck));
-	return calculateScore(player.hand);
+	calculateScore(player);
+
+}
+
+function playersTurn(player) {
+
+
 
 }

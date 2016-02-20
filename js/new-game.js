@@ -9,11 +9,12 @@ $(function () {
 		player1.hand = dealHand(deck);
 		player2.hand = dealHand(deck);
 		dealer.hand = dealHand(deck);
-		$('#playerOneScore').text(calculateScore(player1.hand));
-		$('#playerTwoScore').text(calculateScore(player2.hand));
-		$('#dealerScore').text(calculateScore(dealer.hand));
-		displayCards(player1.hand, '#playerOneHand');
-		displayCards(player2.hand, '#playerTwoHand');
+		calculateScore(player1);
+		calculateScore(player2);
+		calculateScore(dealer);
+		displayCards(player1);
+		displayCards(player2);
+		displayCards(dealer);
 	})
 
 	$('#playerOneHit').on('click', function () {
@@ -36,14 +37,16 @@ function Card (suit, value) {
 	this.value= value;
 }
 
-function Player (name, hand, total) {
-	this.name = name;
+function Player (number, hand, total, container) {
+	this.number = number;
 	this.total = 0;
 	this.hand = [];
+	this.container = '#player' + number + 'Hand';
 }
-var player1 = new Player("Joey");
-var player2 = new Player("Scott");
-var dealer = new Player("Dealer");
+var dealer = new Player(0);
+var player1 = new Player(1);
+var player2 = new Player(2);
+
 
 function createDeck(cardSuits, cardValues) {
 
@@ -82,43 +85,46 @@ function randomNumber(deck)
   return Math.floor(Math.random() * (deck.length - 1)) + 1 
 };
 
-function calculateScore (hand, handID) {
+function calculateScore (player) {
 	var total = 0;
+	var scoreboard = document.querySelector(player.container + ' .score');
 	// Loop through the hand, and convert letter values to numbers, then add to total
-	for (var i = 0; i < hand.length; i++) {
-		if (hand[i].value === "J" || hand[i].value === "Q" || hand[i].value === "K") {
+	for (var i = 0; i < player.hand.length; i++) {
+		if (player.hand[i].value === "J" || player.hand[i].value === "Q" || player.hand[i].value === "K") {
 			total += 10;
 		// If card is an ace, check to see whether it should be 1 or 11
-		} else if (hand[i].value === "A") {
+		} else if (player.hand[i].value === "A") {
 			if (total + 11 > 21) {
 				total += 1;
 			} else {
 				total += 11;
 			}
 		} else {
-			total += parseInt(hand[i].value);
+			total += parseInt(player.hand[i].value);
 		}		
 	}
 
 	// If total is a blackjack, or a bust, tell player- otherwise just display total
 	if (total > 21) {
-		return "Bust! (" + total + ")";	
+		scoreboard.innerHTML = "Bust! (" + total + ")";	
 	} else if (total === 21) {
-		return "Blackjack!";
+		scoreboard.innerHTML = "Blackjack!";
 	} else {
-		return total;
+		scoreboard.innerHTML =  total;
 	}
 
 }
 
-function displayCards(hand, handID) {
+function displayCards(player) {
 
-	document.querySelector(handID + ' .card-container').className = 'card-container flipped';
-	var suits = document.querySelectorAll(handID + ' .suit');
-	var values = document.querySelectorAll(handID + ' .value');
+	// Flip all the cards in the hand
+	document.querySelector(player.container + ' .card-container').className = 'card-container flipped';
+	var suits = document.querySelectorAll(player.container + ' .suit');
+	var values = document.querySelectorAll(player.container + ' .value');
+	// Display the suits and values
 	for (var i = 0; i < suits.length; i++) {
-		suits[i].innerHTML = hand[i].suit;
-		values[i].innerHTML = hand[i].value;
+		suits[i].innerHTML = player.hand[i].suit;
+		values[i].innerHTML = player.hand[i].value;
 	}
 
 }

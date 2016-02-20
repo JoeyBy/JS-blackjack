@@ -21,15 +21,33 @@
 
   <section class="container play-area">
     <div class="row">
-      <div class="dealer-hand-outer card-hand">
+      <div class="dealer-hand-outer card-hand playerHand" id="player0Hand">
         <h2>Dealer (Joey)</h2>
+        <div class="card-container">
+          <div class="card card1">
+            <div class="side side1">
+            </div>
+            <div class="side side2">
+              <p class="suit"></p>
+              <p class="value"></p>
+            </div>
+          </div>
+          <div class="card card2">
+            <div class="side side1">
+            </div>
+            <div class="side side2">
+              <p class="suit"></p>
+              <p class="value"></p>
+            </div>
+          </div>
+        </div>
         <span class="score" id="dealerScore"></span>
         <span id="dealerHand"></span>
       </div>
     </div>
     <div class="row">
       <div class="player-hands-outer card-hand">
-        <div class="col-sm-6 playerHand" id="playerOneHand">
+        <div class="col-sm-6 playerHand" id="player1Hand">
           <h2>Player One</h2>
           <div class="card-container">
             <div class="card card1">
@@ -53,7 +71,7 @@
           <div class="button" id="playerOneHit">HIT</div>
           <div class="button" id="playerOneStay">STAY</div>
         </div>
-        <div class="col-sm-6 playerHand" id="playerTwoHand">
+        <div class="col-sm-6 playerHand" id="player2Hand">
           <h2>Player Two</h2>
           <div class="card-container">
             <div class="card card1">
