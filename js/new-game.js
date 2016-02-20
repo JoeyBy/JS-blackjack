@@ -15,6 +15,14 @@ $(function () {
 		displayCards(player1.hand, '#playerOneHand');
 		displayCards(player2.hand, '#playerTwoHand');
 	})
+
+	$('#playerOneHit').on('click', function () {
+		$('#playerOneScore').text(hit(player1));
+	});
+	$('#playerTwoHit').on('click', function () {
+		$('#playerTwoScore').text(hit(player2));
+	});
+
 });
 
 
@@ -74,7 +82,7 @@ function randomNumber(deck)
   return Math.floor(Math.random() * (deck.length - 1)) + 1 
 };
 
-function calculateScore (hand) {
+function calculateScore (hand, handID) {
 	var total = 0;
 	// Loop through the hand, and convert letter values to numbers, then add to total
 	for (var i = 0; i < hand.length; i++) {
@@ -100,15 +108,15 @@ function calculateScore (hand) {
 	} else {
 		return total;
 	}
+
 }
 
 function displayCards(hand, handID) {
 
-	var cards = document.querySelectorAll(handID + ' .card');
+	document.querySelector(handID + ' .card-container').className = 'card-container flipped';
 	var suits = document.querySelectorAll(handID + ' .suit');
 	var values = document.querySelectorAll(handID + ' .value');
-	for (var i = 0; i < cards.length; i++) {
-		cards[i].className += ' flipped';
+	for (var i = 0; i < suits.length; i++) {
 		suits[i].innerHTML = hand[i].suit;
 		values[i].innerHTML = hand[i].value;
 	}

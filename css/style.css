@@ -64,6 +64,6 @@
   backface-visibility: hidden;
 }
 
-.flipped {
+.flipped .card{
   transform: rotateY( 180deg );
 }
