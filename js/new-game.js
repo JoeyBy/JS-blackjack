@@ -13,6 +13,7 @@ $(function () {
 		$('#playerTwoScore').text(calculateScore(player2.hand));
 		$('#dealerScore').text(calculateScore(dealer.hand));
 		displayCards(player1.hand, '#playerOneHand');
+		displayCards(player2.hand, '#playerTwoHand');
 	})
 });
 
@@ -103,11 +104,13 @@ function calculateScore (hand) {
 
 function displayCards(hand, handID) {
 
+	var cards = document.querySelectorAll(handID + ' .card');
 	var suits = document.querySelectorAll(handID + ' .suit');
 	var values = document.querySelectorAll(handID + ' .value');
-	suits[0].innerHTML = player1.hand[0].suit;
-	suits[1].innerHTML = player1.hand[1].suit;
-	values[0].innerHTML = player1.hand[0].value;
-	values[1].innerHTML = player1.hand[1].value;
+	for (var i = 0; i < cards.length; i++) {
+		cards[i].className += ' flipped';
+		suits[i].innerHTML = hand[i].suit;
+		values[i].innerHTML = hand[i].value;
+	}
 
 }

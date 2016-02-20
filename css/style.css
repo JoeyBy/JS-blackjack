@@ -41,17 +41,29 @@
   -webkit-transition: all .5s ease-in-out;
 }
 
+.side {
+  border-radius: 10px;
+  border: .5px solid black;
+  width: 100%;
+  height: 100%;
+}
+
 .side1 {
   background-image: url('../img/playing-card-back.jpg');
   background-size: cover;
   display: block;
   position: absolute;
-  width: 100%;
-  height: 100%;
   backface-visibility: hidden;
   text-align: center;
   padding: 5%;
   padding-top: 20%;
-  border-radius: 10px;
 }
 
+.side2 {
+  transform: rotateY( 180deg );
+  backface-visibility: hidden;
+}
+
+.flipped {
+  transform: rotateY( 180deg );
+}
