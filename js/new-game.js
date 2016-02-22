@@ -25,12 +25,17 @@ $(function () {
 	});
 	$('#playerOneStay').on('click', function () {
 		if ($(this).hasClass('is-active')) {
-			stay(player1);
+			endTurn(player1);
 		}
 	});
 	$('#playerTwoHit').on('click', function () {
 		if ($(this).hasClass('is-active')) {
 			hit(player2);
+		}
+	});
+	$('#playerTwoStay').on('click', function () {
+		if ($(this).hasClass('is-active')) {
+			endTurn(player2);
 		}
 	});
 
@@ -118,8 +123,10 @@ function calculateScore (player) {
 	// If total is a blackjack, or a bust, tell player- otherwise just display total
 	if (total > 21) {
 		scoreboard.innerHTML = "Bust! (" + total + ")";	
+		endTurn(player);
 	} else if (total === 21) {
 		scoreboard.innerHTML = "Blackjack!";
+		endTurn(player);
 	} else {
 		scoreboard.innerHTML =  total;
 	}
