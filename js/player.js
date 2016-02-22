@@ -13,19 +13,43 @@ function hit(player) {
 
 function playersTurn(player) {
 
-	// Show hit and stay buttons as active
-	var buttons = document.querySelectorAll('#' + player.container + ' .button');
-	buttons[0].className += ' is-active';
-	buttons[1].className += ' is-active';
-
+	if (player == dealer) {
+		dealersTurn(player);
+	} else {
+		// Show hit and stay buttons as active
+		var buttons = document.querySelectorAll('#' + player.container + ' .button');
+		buttons[0].className += ' is-active';
+		buttons[1].className += ' is-active';
+	}
 }
 
 function endTurn(player) {
 
-	// Show hit and stay buttons as inactive
-	var buttons = document.querySelectorAll('#' + player.container + ' .button');
-	buttons[0].className = 'button';
-	buttons[1].className = 'button';
-	playersTurn(players[player.number + 1]);
+	if (player == dealer) {
+		endGame();
+	} else {
+		// Show hit and stay buttons as inactive
+		var buttons = document.querySelectorAll('#' + player.container + ' .button');
+		buttons[0].className = 'button';
+		buttons[1].className = 'button';
+		// Advance to next players turn (since player1 is players[0], can use current player's
+		// number to advance)
+		playersTurn(players[player.number]);
+	}
+
+}
+
+function dealersTurn(dealer) {
+
+	while (dealer.total < 17) {
+		hit(dealer);
+	};
+	endGame();
+
+}
+
+function endGame() {
+
+	console.log("It's over!");
 
 }

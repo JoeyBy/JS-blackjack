@@ -61,7 +61,7 @@ function Player (number, hand, total, container) {
 var dealer = new Player(0);
 var player1 = new Player(1);
 var player2 = new Player(2);
-var players = [dealer, player1, player2];
+var players = [player1, player2, dealer];
 
 
 function createDeck(cardSuits, cardValues) {
@@ -123,12 +123,15 @@ function calculateScore (player) {
 	// If total is a blackjack, or a bust, tell player- otherwise just display total
 	if (total > 21) {
 		scoreboard.innerHTML = "Bust! (" + total + ")";	
+		player.total = total;
 		endTurn(player);
 	} else if (total === 21) {
 		scoreboard.innerHTML = "Blackjack!";
+		player.total = total;
 		endTurn(player);
 	} else {
 		scoreboard.innerHTML =  total;
+		player.total = total;
 	}
 
 }
