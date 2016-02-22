@@ -102,22 +102,28 @@ function randomNumber(deck)
 };
 
 function calculateScore (player) {
-	var total = 0;
+	var totals = [0];
 	var scoreboard = document.querySelector('#' + player.container + ' .score');
-	// Loop through the hand, and convert letter values to numbers, then add to total
+	// Loop through the hand, and convert letter values to numbers, then add to every value in totals array
 	for (var i = 0; i < player.hand.length; i++) {
 		if (player.hand[i].value === "J" || player.hand[i].value === "Q" || player.hand[i].value === "K") {
-			total += 10;
-		// If card is an ace, check to see whether it should be 1 or 11
+			totals = addToTotals(totals, 10);
+		// If card is an ace, add 1 to every value in the total array- and then combine with
+		// a duplicate number of totals where we add 10
+		// (this creates an array of all possible totals, which we can then choose from)
 		} else if (player.hand[i].value === "A") {
-			if (total + 11 > 21) {
-				total += 1;
-			} else {
-				total += 11;
-			}
+			totals = addToTotals(totals, 1).concat(addToTotals(totals, 11));
 		} else {
-			total += parseInt(player.hand[i].value);
+			totals = addToTotals(totals, parseInt(player.hand[i].value));
 		}		
+	}
+
+	var total = totals[0];
+	// Choose the highest total that does not bust
+	for (var i = 0; i < totals.length; i++) {
+		if (totals[i] > total && totals[i] < 22) {
+			total = totals[i];
+		}
 	}
 
 	// If total is a blackjack, or a bust, tell player- otherwise just display total
@@ -148,4 +154,16 @@ function displayCards(player) {
 		values[i].innerHTML = player.hand[i].value;
 	}
 
+}
+
+function addToTotals (array, value) {
+
+	// Creates a copy of the array
+	var tot = array.slice(0);
+	// Adds the value to each element in that copy
+	for (var i = 0; i < tot.length; i++) {
+		tot[i] = tot[i] + value;
+	}
+	// Returns the copy
+	return tot;
 }
