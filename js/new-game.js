@@ -6,12 +6,9 @@ $(function () {
 		player1.hand = dealHand(deck);
 		player2.hand = dealHand(deck);
 		dealer.hand = dealHand(deck);
-		calculateScore(player1);
-		calculateScore(player2);
-		calculateScore(dealer);
-		displayCards(player1);
-		displayCards(player2);
-		displayCards(dealer);
+		flipCard(player1, 'card2');
+		flipCard(player2, 'card2');
+		flipCard(dealer, 'card2');
 		playersTurn(player1);
 	})
 
@@ -139,10 +136,11 @@ function calculateScore (player) {
 
 }
 
-function displayCards(player) {
+function flipCard(player, card) {
 
-	// Flip all the cards in the hand
-	document.querySelector('#' + player.container + ' .card-container').className = 'card-container flipped';
+	// Flip the card
+	document.querySelector('#' + player.container + ' .card-container .' + card).className = 'card ' + card + ' flipped';
+	
 	var suits = document.querySelectorAll('#' + player.container + ' .suit');
 	var values = document.querySelectorAll('#' + player.container + ' .value');
 	// Display the suits and values
