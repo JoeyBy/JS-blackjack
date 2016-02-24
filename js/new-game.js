@@ -1,10 +1,7 @@
 $(function () {
 	
-	$('#startGame').on('click', function () {
-		$('#startGame').hide();
-		$('#deal').show();
-	});
 	$('#deal').on('click', function () {
+		$('#deal').removeClass('is-active');
 		createDeck(cardSuits, cardValues);
 		player1.hand = dealHand(deck);
 		player2.hand = dealHand(deck);
