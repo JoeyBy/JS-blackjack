@@ -16,7 +16,7 @@ function playersTurn(player) {
 	// Flip the hidden card and score the hand
 	flipCard(player, 'card1');
 	calculateScore(player);
-	
+
 	if (player == dealer) {
 		dealersTurn(player);
 	} else {
@@ -54,6 +54,15 @@ function dealersTurn(dealer) {
 
 function endGame() {
 
-	console.log("It's over!");
+	// Loop through players, except for dealer
+	for (var i = 0; i < players.length - 1; i++) {
+		if (players[i].total > dealer.total && players[i].total <= 21) {
+			console.log("Player " + (i + 1) + " wins!");
+		} else if (players[i].total == dealer.total) {
+			console.log("Player " + (i + 1) +  " pushes!");
+		} else {
+			console.log("Player " + (i + 1) + " loses!");
+		}
+	}
 
 }
