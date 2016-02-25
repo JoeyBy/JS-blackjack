@@ -56,7 +56,6 @@ function endGame() {
 	for (var i = 0; i < players.length - 1; i++) {
 		if ((players[i].total > dealer.total && players[i].total <= 21) || (dealer.total > 21 && players[i].total <= 21)) {
 			document.querySelector('#' + players[i].container + ' h2').innerHTML += " wins!";
-			console.log(players[i].container);
 		} else if (players[i].total == dealer.total) {
 			document.querySelector('#' + players[i].container + ' h2').innerHTML += " pushes!";
 		} else {

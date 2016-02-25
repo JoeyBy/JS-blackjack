@@ -1,7 +1,8 @@
 $(function () {
 	
 	$('#deal').on('click', function () {
-		$('#deal').removeClass('is-active');
+		$('#deal').hide();
+		$('#newGame').show();
 		createDeck(cardSuits, cardValues);
 		player1.hand = dealHand(deck);
 		player2.hand = dealHand(deck);
@@ -10,7 +11,24 @@ $(function () {
 		flipCard(player2, 'card2');
 		flipCard(dealer, 'card2');
 		playersTurn(player1);
-	})
+	});
+	$('#newGame').on('click', function () {
+		player1.hand = [];
+		player2.hand = [];
+		dealer.hand = [];
+		$('#deal').show();
+		$('#newGame').hide();
+		// Reset everything to original condition
+		$('.flipped').removeClass('flipped');
+		$('.score').text('0');
+		$('.playerHand .button').removeClass('is-active');
+		$('#player0Hand').find('.card').slice(2).remove();
+		$('#player1Hand').find('.card').slice(2).remove();
+		$('#player2Hand').find('.card').slice(2).remove();
+		$('#player0Hand h2').text('Dealer (Joey)');
+		$('#player1Hand h2').text('Player One');
+		$('#player2Hand h2').text('Player Two');
+	});
 
 	$('#playerOneHit').on('click', function () {
 		if ($(this).hasClass('is-active')) {

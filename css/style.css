@@ -20,6 +20,10 @@
   border-radius: 8px;
 }
 
+#newGame {
+  display: none;
+}
+
 .button.is-active {
   background-color: green;
   color: white;
