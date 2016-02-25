@@ -29,9 +29,7 @@ function playersTurn(player) {
 
 function endTurn(player) {
 
-	if (player == dealer) {
-		endGame();
-	} else {
+	if (player != dealer) {
 		// Show hit and stay buttons as inactive
 		var buttons = document.querySelectorAll('#' + player.container + ' .button');
 		buttons[0].className = 'button';
@@ -47,22 +45,28 @@ function dealersTurn(dealer) {
 
 	while (dealer.total < 17) {
 		hit(dealer);
-	};
+	}
 	endGame();
 
 }
 
 function endGame() {
 
-	// Loop through players, except for dealer
+	// Loop through players, except for dealer, and declare winners, losers, and pushers
 	for (var i = 0; i < players.length - 1; i++) {
-		if (players[i].total > dealer.total && players[i].total <= 21) {
-			console.log("Player " + (i + 1) + " wins!");
+		if ((players[i].total > dealer.total && players[i].total <= 21) || (dealer.total > 21 && players[i].total <= 21)) {
+			document.querySelector('#' + players[i].container + ' h2').innerHTML += " wins!";
+			console.log(players[i].container);
 		} else if (players[i].total == dealer.total) {
-			console.log("Player " + (i + 1) +  " pushes!");
+			document.querySelector('#' + players[i].container + ' h2').innerHTML += " pushes!";
 		} else {
-			console.log("Player " + (i + 1) + " loses!");
+			document.querySelector('#' + players[i].container + ' h2').innerHTML += " loses!";
 		}
+	}
+
+	// Then check if the dealer won
+	if (dealer.total > player1.total && dealer.total > player2.total && dealer.total <= 21) {
+		document.querySelector('#' + dealer.container + ' h2').innerHTML += " wins!";
 	}
 
 }
