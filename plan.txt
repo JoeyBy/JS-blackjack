@@ -56,11 +56,5 @@ endGame() {
 We could split the files into setup.js, player.js, and dealer.js.
 
 
-Current Issues:
 
-The Ace:
-If a player is dealt an ace and another card, the program picks the highest total that isn't over 21. So if it's a 6 and an A, the total is now 17. However, if the player then hits and gets a 5, the program will record a bust. The problem is the program processes the cards in order- aces must be processed last.
-
-Dealing Again:
-If you finish a game and click deal, it causes all sorts of problems. Needs to revert to "New Game" button after initial deal.
 
