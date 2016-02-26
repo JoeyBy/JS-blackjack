@@ -7,6 +7,7 @@ $(function () {
 		player1.hand = dealHand(deck);
 		player2.hand = dealHand(deck);
 		dealer.hand = dealHand(deck);
+		setCardFaces(players);
 		flipCard(player1, 'card2');
 		flipCard(player2, 'card2');
 		flipCard(dealer, 'card2');
@@ -54,8 +55,8 @@ $(function () {
 });
 
 
-var cardSuits = [ 'S', 'H', 'D', 'C'];
-var cardValues = [ '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A' ];
+var cardSuits = [ 'spades', 'hearts', 'diamonds', 'clubs'];
+var cardValues = [ '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace' ];
 var deck = [];
 var handOne = [];
 var handTwo = [];
@@ -118,12 +119,12 @@ function calculateScore (player) {
 	var scoreboard = document.querySelector('#' + player.container + ' .score');
 	// Loop through the hand, and convert letter values to numbers, then add to every value in totals array
 	for (var i = 0; i < player.hand.length; i++) {
-		if (player.hand[i].value === "J" || player.hand[i].value === "Q" || player.hand[i].value === "K") {
+		if (player.hand[i].value === "jack" || player.hand[i].value === "queen" || player.hand[i].value === "king") {
 			totals = addToTotals(totals, 10);
 		// If card is an ace, add 1 to every value in the total array- and then combine with
 		// a duplicate number of totals where we add 10
 		// (this creates an array of all possible totals, which we can then choose from)
-		} else if (player.hand[i].value === "A") {
+		} else if (player.hand[i].value === "ace") {
 			totals = addToTotals(totals, 1).concat(addToTotals(totals, 11));
 		} else {
 			totals = addToTotals(totals, parseInt(player.hand[i].value));
@@ -154,18 +155,21 @@ function calculateScore (player) {
 
 }
 
+function setCardFaces (players) {
+
+	for (var i = 0; i < players.length; i++) {
+		var cards = document.querySelectorAll('#' + players[i].container + ' .card-container .side2');
+		for (var j = 0; j < cards.length; j++) {
+			cards[j].style.backgroundImage = 'url("img/cardfaces/' + players[i].hand[j].value + '_of_' + players[i].hand[j].suit + '.png")';
+		}
+	}
+
+}
+
 function flipCard(player, card) {
 
 	// Flip the card
 	document.querySelector('#' + player.container + ' .card-container .' + card).className = 'card ' + card + ' flipped';
-	
-	var suits = document.querySelectorAll('#' + player.container + ' .suit');
-	var values = document.querySelectorAll('#' + player.container + ' .value');
-	// Display the suits and values
-	for (var i = 0; i < suits.length; i++) {
-		suits[i].innerHTML = player.hand[i].suit;
-		values[i].innerHTML = player.hand[i].value;
-	}
 
 }
 

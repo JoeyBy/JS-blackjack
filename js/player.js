@@ -7,6 +7,7 @@ function hit(player) {
 	var cardContainer = document.querySelector('#' + player.container + ' .card-container');
 	cardContainer.innerHTML += '<div class="card card' + (player.hand.length + 1) + '"><div class="side side1"></div><div class="side side2"><p class="suit"></p><p class="value"></p></div></div>';
 	
+	setCardFaces(players);
 	flipCard(player, 'card' + (player.hand.length + 1))
 	calculateScore(player);
 }
