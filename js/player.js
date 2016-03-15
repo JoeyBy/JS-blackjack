@@ -6,7 +6,7 @@ function hit(player) {
 	setCardFaces(players);
 	flipCard(player, 'card' + (player.hand.length + 1))
 	calculateScore(player);
-	
+
 }
 
 function addCard(player) {
@@ -59,7 +59,7 @@ function dealersTurn(dealer) {
 }
 
 function endGame() {
-
+	//test
 	declareWinners();
 
 }
